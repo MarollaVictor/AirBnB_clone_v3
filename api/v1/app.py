@@ -1,4 +1,7 @@
-from flask import Flask
+#!/usr/bin/python3
+""" Flask server using REST APIs """
+
+from flask import Flask, make_response, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -6,10 +9,18 @@ import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """Closes the storage on teardown"""
     storage.close()
+
+
+@app.errorhandler(404)
+def 404_page_not_found:
+    """ return json repr of 404 Page """
+    return make_response(jsonify({'error': 'Not Found'}), 404)
+
 
 if __name__ == "__main__":
     host = os.getenv('HBNB_API_HOST', '0.0.0.0')
