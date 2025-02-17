@@ -17,12 +17,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class FileStorage:
-    """serializes instances to a JSON file & deserializes back to instances"""
-
-    # string - path to the JSON file
-    __file_path = "file.json"
-    # dictionary - empty but will store all objects by <class name>.id
-    __objects = {}
+    __storage_type = 'file'
 
     def all(self, cls=None):
         """returns the dictionary __objects"""
@@ -47,6 +42,17 @@ class FileStorage:
             json_objects[key] = self.__objects[key].to_dict()
         with open(self.__file_path, 'w') as f:
             json.dump(json_objects, f)
+
+    def get(self, cls, id):
+        """Retrieve one object by class and ID."""
+        if cls is None or not isinstance(cls, type) or not isinstance(id, str):
+            return None
+        key = f"{cls.__name__}.{id}"
+        return self.__objects.get(key, None)
+
+    def count(self, cls=None):
+        """Count objects in storage, optionally filtered by class."""
+        return len(self.all(cls))
 
     def reload(self):
         """deserializes the JSON file to __objects"""

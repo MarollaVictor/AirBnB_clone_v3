@@ -21,9 +21,7 @@ classes = {"Amenity": Amenity, "City": City,
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
-    __engine = None
-    __session = None
+    engine = create_engine('mysql+mysqldb://user:password@host/dbname')
 
     def __init__(self):
         """Instantiate a DBStorage object"""
@@ -63,6 +61,21 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
+    def get(self, cls, id):
+        """Retrieve one object by class and ID. """
+        if cls is None or not isinstance(cls, type) or not isinstance(id, str):
+            return None
+        return self.session.query(cls).get(id)
+
+    def count(self, cls=None):
+        """Count objects in storage, optionally filtered by class."""
+        if cls:
+            return self.session.query(cls).count()
+        else:
+            total = 0
+            for model_cls in self.classes.values():
+                total += self.session.query(model_cls).count()
+                return total
 
     def reload(self):
         """reloads data from the database"""
