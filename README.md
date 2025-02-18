@@ -159,6 +159,6 @@ Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://tw
 
 Second part of Airbnb: Joann Vuong
 
-REST API part: Marolla Victor
+REST API part: Marolla Victor Sedky
 ## License
 Public Domain. No copy write protection. 
