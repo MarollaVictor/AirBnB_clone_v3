@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Flask server using REST APIs """
 
-from flask import Flask, make_response, jsonify
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 import os
@@ -19,7 +19,8 @@ def teardown_db(exception):
 @app.errorhandler(404)
 def 404_page_not_found(error):
     """ return json repr of 404 Page """
-    return make_response(jsonify({"error": "Not Found"}), 404)
+    res = ("error": "Not found")
+    return jsonify(res), 404
 
 
 if __name__ == "__main__":
