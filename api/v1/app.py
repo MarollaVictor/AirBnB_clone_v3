@@ -3,15 +3,12 @@
 from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
-import os
+from os import environ
 from flask_cors import CORS
 
-# Flask app configuration
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.register_blueprint(app_views)
-
-# Enable CORS
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.teardown_appcontext
