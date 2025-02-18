@@ -160,6 +160,7 @@ Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://tw
 Second part of Airbnb: Joann Vuong
 
 REST API part: Marolla Victor
-Followint REST APIs: Fady Sabry
+Following REST APIs: Fady Sabry
+
 ## License
 Public Domain. No copy write protection. 
