@@ -61,6 +61,7 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
+
     def get(self, cls, id):
         """Retrieve one object by class and ID. """
         if cls is None or not isinstance(cls, type) or not isinstance(id, str):
